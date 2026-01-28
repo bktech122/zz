@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<title>Secure Video Library</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#0f172a;
+  color:#fff;
+}
+.hidden{display:none}
+
+/* ===== LOGIN ===== */
+.login{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#020617,#0f172a);
+}
+.login-box{
+  background:#020617;
+  padding:30px;
+  width:320px;
+  border-radius:14px;
+  box-shadow:0 20px 40px rgba(0,0,0,.6);
+}
+.login-box h2{text-align:center}
+.login-box input{
+  width:100%;
+  padding:10px;
+  margin:10px 0;
+  border-radius:8px;
+  border:none;
+}
+.login-box button{
+  width:100%;
+  padding:10px;
+  border:none;
+  border-radius:8px;
+  background:#2563eb;
+  color:#fff;
+  font-size:16px;
+  cursor:pointer;
+}
+.error{
+  color:#f87171;
+  text-align:center;
+  display:none;
+}
+
+/* ===== HEADER ===== */
+header{
+  background:#020617;
+  padding:20px;
+  text-align:center;
+  font-size:22px;
+}
+
+/* ===== DASHBOARD ===== */
+.grid{
+  padding:30px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+}
+.card{
+  background:#020617;
+  padding:30px;
+  border-radius:14px;
+  text-align:center;
+  cursor:pointer;
+  transition:.3s;
+}
+.card:hover{transform:translateY(-5px)}
+
+/* ===== FOLDER VIEW ===== */
+.section{padding:20px}
+iframe{
+  width:100%;
+  height:75vh;
+  border:none;
+  border-radius:12px;
+}
+
+/* ===== BUTTON ===== */
+.back{
+  margin:20px;
+  padding:10px 20px;
+  border:none;
+  border-radius:8px;
+  background:#2563eb;
+  color:white;
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<div id="login" class="login">
+  <div class="login-box">
+    <h2>🔐 Secure Login</h2>
+    <input id="user" placeholder="Username">
+    <input id="pass" type="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+    <p class="error" id="err">ভুল ইউজারনেম বা পাসওয়ার্ড</p>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard" class="hidden">
+  <header>📁 Video Dashboard</header>
+  <div class="grid">
+    <div class="card" onclick="openFolder()">🎥 Video Folder</div>
+  </div>
+</div>
+
+<!-- FOLDER -->
+<div id="folder" class="hidden">
+  <header>🎬 Video Gallery</header>
+  <button class="back" onclick="back()">⬅ Back</button>
+  <div class="section">
+    <iframe 
+    src="https://drive.google.com/embeddedfolderview?id=14YOniTbnVhVMEb974Q68rPkbFz4MGpwb#grid">
+    </iframe>
+  </div>
+</div>
+
+<script>
+function login(){
+  if(user.value==="admin" && pass.value==="9876"){
+    loginDiv.style.display="none";
+    dashboard.classList.remove("hidden");
+  } else {
+    err.style.display="block";
+  }
+}
+function openFolder(){
+  dashboard.classList.add("hidden");
+  folder.classList.remove("hidden");
+}
+function back(){
+  folder.classList.add("hidden");
+  dashboard.classList.remove("hidden");
+}
+const loginDiv=document.getElementById("login");
+const dashboard=document.getElementById("dashboard");
+const folder=document.getElementById("folder");
+</script>
+
+</body>
+</html>
